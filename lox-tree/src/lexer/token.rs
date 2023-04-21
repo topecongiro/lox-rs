@@ -1,16 +1,17 @@
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Token {
     kind: TokenKind,
-    line: usize,
+    len: usize,
+    line_num: usize,
 }
 
 impl Token {
-    pub(crate) fn new(kind: TokenKind, line: usize) -> Token {
-        Token { kind, line }
+    pub(crate) fn new(kind: TokenKind, len: usize, line_num: usize) -> Token {
+        Token { kind, len, line_num }
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum TokenKind {
     LeftParen,
     RightParen,
@@ -23,6 +24,7 @@ pub enum TokenKind {
     Semicolon,
     Slash,
     Star,
+
     Bang,
     BangEqual,
     Equal,
@@ -34,7 +36,7 @@ pub enum TokenKind {
 
     Identifier(String),
     String(String),
-    Number(usize),
+    Number(i64),
 
     And,
     Class,
@@ -53,6 +55,5 @@ pub enum TokenKind {
     Var,
     While,
 
-    EOF,
+    Eof,
 }
-
